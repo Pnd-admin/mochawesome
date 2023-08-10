@@ -395,7 +395,7 @@ describe('Mochawesome Reporter', () => {
 
       return mochaReporter.done(0, mochaExitFn).then(() => {
         mochaExitFn.args[0][0].should.equal(0);
-        logStub.args[0][0].should.equal('No files were generated');
+        logStub.args[0][0].should.equal('Report not generated to any known format');
       });
     });
 

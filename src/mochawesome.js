@@ -34,12 +34,12 @@ const testTotals = {
 function done(output, options, config, failures, exit) {
   return marge
     .create(output, options)
-    .then(([htmlFile, jsonFile]) => {
-      if (!htmlFile && !jsonFile) {
-        log('No files were generated', 'warn', config);
-      } else {
-        jsonFile && log(`Report JSON saved to ${jsonFile}`, null, config);
-        htmlFile && log(`Report HTML saved to ${htmlFile}`, null, config);
+    .then(([htmlFile, jsonFile, callBackFn]) => {
+      htmlFile && log(`Report HTML saved to ${htmlFile}`, null, config);
+      jsonFile && log(`Report JSON saved to ${jsonFile}`, null, config);
+      callBackFn && log(`Report JSON sent to callback function`, null, config);
+      if(!htmlFile && !jsonFile && !callBackFn) {
+        log('Report not generated to any known format', 'warning', config);
       }
     })
     .catch(err => {
